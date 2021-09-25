@@ -4,13 +4,14 @@ import { UsuariosService } from '../services/UsuariosService';
 class UsuariosController {
     //Cadastrar Usuário
     async cadastrar_Usuario(request: Request, response: Response) {
-        const { nome_usuario, telefone, email, senha, cidade, estado, avatar } = request.body;
+        const { adm, nome_usuario, telefone, email, senha, cidade, estado, avatar } = request.body;
 
         const usuariosService = new UsuariosService();
 
         try {
             const usuarios = await usuariosService.cadastrar_Usuario({ nome_usuario, telefone, email, senha, cidade, estado, avatar });
-        
+            
+            console.log("ADM: ", adm);
             return response.json(usuarios);
         }
         catch(err) {
