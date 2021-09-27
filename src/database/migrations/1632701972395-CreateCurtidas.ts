@@ -1,40 +1,25 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateMensagens1632588660159 implements MigrationInterface {
+export class CreateCurtidas1632701972395 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "mensagem",
+                name: "curtidas",
                 columns: [
                     {
-                        name: "id_msg",
+                        name: "id_curtida",
                         type: "integer",
                         isPrimary: true,
                     },
                     {
+                        name: "id_post",
+                        type: "integer",
+                    },
+                    {
                         name: "id_user",
                         type: "integer",
-                    },
-                    {
-                        name: "id_doenca",
-                        type: "integer",
-                    },
-                    {
-                        name: "conteudo_msg", 
-                        type: "varchar",
-                        length: "400",
-                    },
-                    {
-                        name: "data",
-                        type: "timestamp",
-                        default: "now()",
-                    },
-                    {
-                        name: "excluido",
-                        type: "boolean",
-                        default: false,
-                    },
+                    }
                 ],     
                 foreignKeys: [
                     {
@@ -46,20 +31,20 @@ export class CreateMensagens1632588660159 implements MigrationInterface {
                         onUpdate: "SET NULL",
                     },
                     {
-                        name: "FKDoenca",
-                        referencedTableName: "doencas",
-                        referencedColumnNames: ["id_doenca"],
-                        columnNames: ["id_doenca"],
+                        name: "FKPost",
+                        referencedTableName: "publicacao",
+                        referencedColumnNames: ["id_publicacao"],
+                        columnNames: ["id_post"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
                     },
                 ],        
             })
-        ) 
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.dropTable("mensagem");
+        queryRunner.dropTable("curtidas");
     }
 
 }

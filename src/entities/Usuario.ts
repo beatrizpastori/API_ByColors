@@ -28,6 +28,9 @@ class Usuario {
     estado: string;
 
     @Column()
+    bio: string;
+
+    @Column()
     avatar: number;
 
     @Column()

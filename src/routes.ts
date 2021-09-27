@@ -16,13 +16,18 @@ const curtidasController = new CurtidasController();
 const mensagemController = new MensagemController();
 
 //Usuários
-routes.post("/usuarios", usuariosController.cadastrar_Usuario);
-routes.get("/usuarios/:nome_usuario", usuariosController.acharPorNome_Usuario);
+routes.post("/usuarios", usuariosController.cadastrar_Usuario); //Cadastrar
+routes.get("/usuarios", usuariosController.listar_Usuario); //Listar todos
+routes.get("/usuarios/?email=:email", usuariosController.acharPorEmail_Usuario); //Achar por email
+routes.get("/usuarios/?nome_usuario=:nome_usuario", usuariosController.acharPorNome_Usuario); //Achar por nome
 //routes.put("/usuarios/:nome_usuario", usuariosController.atualizar);
+// Achar por email
+//Excluir
 
 //Publicação
-routes.post("/publicacao", publicacaoController.criar_publicacao);
+routes.post("/publicacao", publicacaoController.criar_publicacao); //Criar
 routes.get("/usuarios/:conteudo", publicacaoController.achar_publi);
+//Excluir
 
 //Doenças
 routes.post("/doencas", doencasController.cadastro_doenca);

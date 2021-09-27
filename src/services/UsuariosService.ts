@@ -3,13 +3,14 @@ import { Usuario } from "../entities/Usuario";
 import { UsuariosRepository } from "../repositories/UsuariosRepository";
 
 interface IUsuariosCreate {
-    adm?: boolean;
+    adm: boolean;
     nome_usuario: string;
     telefone: string;
     email: string;
     senha: string;
     cidade: string;
     estado: string;
+    bio: string;
     avatar: number;
     excluido?: boolean;
 }
@@ -22,7 +23,7 @@ class UsuariosService {
     }
 
     //Cadastrar Usuário
-    async cadastrar_Usuario({ nome_usuario, telefone, email, senha, cidade, estado, avatar } : IUsuariosCreate) {
+    async cadastrar_Usuario({ adm, nome_usuario, telefone, email, senha, cidade, estado, bio, avatar } : IUsuariosCreate) {
         const userAlreadyExists = await this.usuariosRepository.findOne({
             email
         });
@@ -30,15 +31,18 @@ class UsuariosService {
         if(userAlreadyExists) {
             throw new Error("Email já cadastrado!");
         }
-
+        
         const usuarios = this.usuariosRepository.create({
+            adm,
             nome_usuario,
             telefone,
             email,
             senha,
             cidade,
             estado,
+            bio,
             avatar,
+            excluido:false,
         });
 
         await this.usuariosRepository.save(usuarios);
@@ -46,10 +50,26 @@ class UsuariosService {
         return usuarios;
     }
 
+    //Listar Todos Usuários
+    async listar_Usuario() {
+        const usuarios = await this.usuariosRepository.find();
+
+        return usuarios;
+    }
+
+    //Achar Usuário por Email
+    async acharPorEmail_Usuario(email: string) {
+        const list = await this.usuariosRepository.find({
+            where: { email }
+        });
+
+        return list;
+    }
+
     //Achar Usuário por Nome
     async acharPorNome_Usuario(nome_usuario: string) {
-        const usuarios = await this.usuariosRepository.findOne({
-            nome_usuario
+        const usuarios = await this.usuariosRepository.find({
+            where: { nome_usuario }
         });
         
         return usuarios;

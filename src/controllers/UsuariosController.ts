@@ -4,14 +4,13 @@ import { UsuariosService } from '../services/UsuariosService';
 class UsuariosController {
     //Cadastrar Usuário
     async cadastrar_Usuario(request: Request, response: Response) {
-        const { adm, nome_usuario, telefone, email, senha, cidade, estado, avatar } = request.body;
+        const { adm, nome_usuario, telefone, email, senha, cidade, estado, bio, avatar } = request.body;
 
         const usuariosService = new UsuariosService();
 
         try {
-            const usuarios = await usuariosService.cadastrar_Usuario({ nome_usuario, telefone, email, senha, cidade, estado, avatar });
+            const usuarios = await usuariosService.cadastrar_Usuario({ adm, nome_usuario, telefone, email, senha, cidade, estado, bio, avatar });
             
-            console.log("ADM: ", adm);
             return response.json(usuarios);
         }
         catch(err) {
@@ -22,14 +21,34 @@ class UsuariosController {
     }
 
     //Achar Usuário Por Nome
+    async listar_Usuario(request: Request, response: Response) {
+        const usuariosService = new UsuariosService();
+
+        const usuarios = await usuariosService.listar_Usuario();
+
+        return response.json(usuarios);
+    }
+
+    //Achar Usuário Por Email
+    async acharPorEmail_Usuario(request: Request, response: Response) {
+        const { email } = request.params;
+
+        const usuariosService = new UsuariosService();
+
+        const list = await usuariosService.acharPorEmail_Usuario(email);
+
+        return response.json(list);
+    }
+
+    //Achar Usuário Por Nome
     async acharPorNome_Usuario(request: Request, response: Response) {
         const { username } = request.params;
 
         const usuariosService = new UsuariosService();
 
-        const usuarios = await usuariosService.acharPorNome_Usuario(username);
+        const list = await usuariosService.acharPorNome_Usuario(username);
 
-        return response.json(usuarios);
+        return response.json(list);
     }
 
     /*

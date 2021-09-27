@@ -1,48 +1,50 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateContatos1632588502267 implements MigrationInterface {
+export class CreateMensagens1632702018269 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "contatos",
+                name: "mensagem",
                 columns: [
                     {
-                        name: "id_contato",
+                        name: "id_msg",
                         type: "integer",
                         isPrimary: true,
+                    },
+                    {
+                        name: "id_user",
+                        type: "integer",
                     },
                     {
                         name: "id_doenca",
                         type: "integer",
                     },
                     {
-                        name: "nome_lugar",
+                        name: "conteudo_msg", 
                         type: "varchar",
                         length: "400",
                     },
                     {
-                        name: "telefone",
-                        type: "varchar",
-                        length: "30",
-                    },
-                    {
-                        name: "site",
-                        type: "varchar",
-                        length: "50",
-                    },
-                    {
-                        name: "email",
-                        type: "varchar",
-                        length: "50",
+                        name: "data",
+                        type: "timestamp",
+                        default: "now()",
                     },
                     {
                         name: "excluido",
                         type: "boolean",
                         default: false,
                     },
-                ],
+                ],     
                 foreignKeys: [
+                    {
+                        name: "FKUser",
+                        referencedTableName: "usuarios",
+                        referencedColumnNames: ["id_usuario"],
+                        columnNames: ["id_user"],
+                        onDelete: "SET NULL",
+                        onUpdate: "SET NULL",
+                    },
                     {
                         name: "FKDoenca",
                         referencedTableName: "doencas",
@@ -51,13 +53,13 @@ export class CreateContatos1632588502267 implements MigrationInterface {
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
                     },
-                ],                     
+                ],        
             })
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.dropTable("contatos");
+        queryRunner.dropTable("mensagem"); 
     }
 
 }
