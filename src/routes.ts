@@ -21,7 +21,6 @@ routes.get("/usuarios", usuariosController.listar_Usuario); //Listar todos
 routes.get("/usuarios/?email=:email", usuariosController.acharPorEmail_Usuario); //Achar por email
 routes.get("/usuarios/?nome_usuario=:nome_usuario", usuariosController.acharPorNome_Usuario); //Achar por nome
 //routes.put("/usuarios/:nome_usuario", usuariosController.atualizar);
-// Achar por email
 //Excluir
 
 //Publicação
