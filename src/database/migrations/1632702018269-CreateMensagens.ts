@@ -13,7 +13,7 @@ export class CreateMensagens1632702018269 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: "id_user",
+                        name: "id_usuario",
                         type: "integer",
                     },
                     {
@@ -41,7 +41,7 @@ export class CreateMensagens1632702018269 implements MigrationInterface {
                         name: "FKUser",
                         referencedTableName: "usuarios",
                         referencedColumnNames: ["id_usuario"],
-                        columnNames: ["id_user"],
+                        columnNames: ["id_usuario"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
                     },

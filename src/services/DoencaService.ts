@@ -40,7 +40,8 @@ class DoencasService{
             deteccao, 
             diagnostico, 
             tratamento, 
-            ordem
+            ordem,
+            excluido:false,
         });
 
         await this.doencasRepository.save(doencas);

@@ -4,7 +4,8 @@ import { DoencasService } from "../services/DoencaService";
 
 class DoencasController {
     async cadastro_doenca (request: Request, response:Response){
-        const {id_mes, nome_doenca, nome_mes, definicao, estatisticas, aumenta_risco, prevencao, sintomas, deteccao, diagnostico, tratamento, ordem} = request.body;
+        const {id_mes, nome_doenca, nome_mes, definicao, estatisticas, aumenta_risco, prevencao, sintomas, deteccao, diagnostico, tratamento, ordem } = request.body;
+        
         const doencasService = new DoencasService();
 
         try{
@@ -20,14 +21,14 @@ class DoencasController {
                 deteccao, 
                 diagnostico, 
                 tratamento, 
-                ordem
+                ordem,
             });
 
             return response.json(doencas);
         }
-        catch(e) {
+        catch(err) {
             return response.status(400).json({
-                message: e.message,
+                message: err.message,
             });
         }
     }

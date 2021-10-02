@@ -29,16 +29,17 @@ routes.get("/usuarios/:conteudo", publicacaoController.achar_publi);
 //Excluir
 
 //Doenças
-routes.post("/doencas", doencasController.cadastro_doenca);
+routes.post("/doencas", doencasController.cadastro_doenca); //Cadastrar
 
 //Contatos
-routes.post("/contatos", contatosController.cadastro_contato);
+routes.post("/contatos", contatosController.cadastro_contato); //Cadastrar
 
 //Curtidas
-routes.post("/curtidas", curtidasController.curtir);
+routes.post("/curtidas", curtidasController.curtir); //Cadastrar
 
 //Mensagem
-routes.post("/mensagem", mensagemController.enviar_mensagem);
+routes.post("/mensagem", mensagemController.criar_Mensagem); //Cadastrar
+routes.get("/mensagem/?id_doenca=:id_doenca", mensagemController.listarPorDoenca_Mensagem); //Achar por doença
 
 
 export { routes };
