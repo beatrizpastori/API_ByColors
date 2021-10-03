@@ -40,28 +40,40 @@ class UsuariosController {
         return response.json(list);
     }
 
-    //Achar Usuário Por Nome
-    async acharPorNome_Usuario(request: Request, response: Response) {
-        const { username } = request.params;
+    //Achar Usuário Por Id
+    async acharPorId_Usuario(request: Request, response: Response) {
+        const { id_usuario } = request.params;
 
         const usuariosService = new UsuariosService();
 
-        const list = await usuariosService.acharPorNome_Usuario(username);
+        const list = await usuariosService.acharPorId_Usuario(id_usuario);
 
         return response.json(list);
     }
 
-    /*
-    async atualizar(request: Request, response: Response) {
-        const { username } = request.params;
-        const { chat } = request.body;
+    //Atualizar Usuário
+    async atualizar_Usuario(request: Request, response: Response) {
+        const { id_usuario } = request.params;
+        const { nome_usuario, telefone, email, senha, cidade, estado, bio, avatar } = request.body;
 
         const usuariosService = new UsuariosService();
 
-        const usuarios = await usuariosService.update(username, chat);
+        const usuarios = await usuariosService.atualizar_Usuario(id_usuario, nome_usuario, telefone, email, senha, cidade, estado, bio, avatar);
 
         return response.json(usuarios);
-    }*/
+    }
+
+    //Excluir Usuário
+    async excluir_Usuario(request: Request, response: Response) {
+        const { id_usuario } = request.params;
+        const { excluido } = request.body;
+
+        const usuariosService = new UsuariosService();
+
+        const usuarios = await usuariosService.excluir_Usuario(id_usuario, excluido);
+
+        return response.json(usuarios);
+    }
 }
 
 export { UsuariosController };

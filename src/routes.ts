@@ -19,8 +19,9 @@ const mensagemController = new MensagemController();
 routes.post("/usuarios", usuariosController.cadastrar_Usuario); //Cadastrar
 routes.get("/usuarios", usuariosController.listar_Usuario); //Listar todos
 routes.get("/usuarios/?email=:email", usuariosController.acharPorEmail_Usuario); //Achar por email
-routes.get("/usuarios/?nome_usuario=:nome_usuario", usuariosController.acharPorNome_Usuario); //Achar por nome
-//routes.put("/usuarios/:nome_usuario", usuariosController.atualizar);
+routes.get("/usuarios/?id_usuario=:id_usuario", usuariosController.acharPorId_Usuario); //Achar por id
+routes.put("/usuarios/:id_usuario", usuariosController.atualizar_Usuario); //Atualizar
+routes.put("/usuarios/excluir/:id_usuario", usuariosController.excluir_Usuario); //Atualizar
 //Excluir
 
 //Publicação
@@ -40,6 +41,5 @@ routes.post("/curtidas", curtidasController.curtir); //Cadastrar
 //Mensagem
 routes.post("/mensagem", mensagemController.criar_Mensagem); //Cadastrar
 routes.get("/mensagem/?id_doenca=:id_doenca", mensagemController.listarPorDoenca_Mensagem); //Achar por doença
-
 
 export { routes };

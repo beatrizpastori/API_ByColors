@@ -66,24 +66,36 @@ class UsuariosService {
         return list;
     }
 
-    //Achar Usuário por Nome
-    async acharPorNome_Usuario(nome_usuario: string) {
+    //Achar Usuário por Id
+    async acharPorId_Usuario(id_usuario: string) {
         const usuarios = await this.usuariosRepository.find({
-            where: { nome_usuario }
+            where: { id_usuario }
         });
         
         return usuarios;
     }
 
-    /*Atualizar Usuário
-    async update(email: string, chat: boolean) {
+    //Atualizar Usuário
+    async atualizar_Usuario(id_usuario:string, nome_usuario: string, telefone: string, email: string, senha: string, cidade: string, estado: string, bio: string, avatar: number) {
         const usuarios = await this.usuariosRepository.createQueryBuilder().
         update(Usuario)
-        .set({ chat })
-        .where("email = :email", {
-            email
-        }).execute();
-    }*/
+        .set({ nome_usuario, telefone, email, senha, cidade, estado, bio, avatar })
+        .where("id_usuario = :id_usuario", {
+            id_usuario
+        })
+        .execute();
+    }
+
+    //Excluir Usuário
+    async excluir_Usuario(id_usuario:string, excluido:boolean) {
+        const usuarios = await this.usuariosRepository.createQueryBuilder().
+        update(Usuario)
+        .set({ excluido })
+        .where("id_usuario = :id_usuario", {
+            id_usuario
+        })
+        .execute();
+    }
 }
 
 export { UsuariosService };
