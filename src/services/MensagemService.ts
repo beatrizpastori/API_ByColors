@@ -3,7 +3,7 @@ import { Mensagem } from "../entities/Mensagem"
 import { MensagemRepository } from "../repositories/MensagemRepository";
 
 interface IMensagemCreate{
-    id_user: number;
+    id_usuario: number;
     id_doenca: number;
     conteudo_msg: string;
     excluido?: boolean;
@@ -17,10 +17,10 @@ class MensagemService{
     }
 
     //Criar Mensagem
-    async criar_Mensagem ({id_user, id_doenca, conteudo_msg}: IMensagemCreate){
+    async criar_Mensagem ({id_usuario, id_doenca, conteudo_msg}: IMensagemCreate){
 
         const mensagem = this.mensagemRepository.create({
-            id_user,
+            id_usuario,
             id_doenca,
             conteudo_msg,
             excluido:false,

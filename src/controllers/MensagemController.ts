@@ -4,12 +4,12 @@ import { MensagemService } from "../services/MensagemService";
 
 class MensagemController {
     async criar_Mensagem (request: Request, response:Response){
-        const {id_user, id_doenca, conteudo_msg} = request.body;
+        const {id_usuario, id_doenca, conteudo_msg} = request.body;
         const mensagemService = new MensagemService();
 
         try{
             const mensagem = await mensagemService.criar_Mensagem({
-                id_user,
+                id_usuario,
                 id_doenca, 
                 conteudo_msg
             });

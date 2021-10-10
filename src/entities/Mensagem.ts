@@ -9,12 +9,9 @@ class Mensagem {
     @PrimaryGeneratedColumn('increment')
     id_msg: number;
 
-    @Column({ name: "id_usuario" })
-    user_id: number;
-
     @JoinColumn({name: "id_usuario"})
     @ManyToOne(() => Usuario)
-    id_user: number;
+    id_usuario: number;
 
     @JoinColumn({name: "id_doenca"})
     @ManyToOne(() => Doenca)
