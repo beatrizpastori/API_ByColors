@@ -1,15 +1,14 @@
 import {Request, Response} from "express";
 import { PublicacaoService } from "../services/PublicacaoService";
 
-
 class PublicacaoController {
-    async criar_publicacao (request: Request, response:Response){
-        const {id_user, id_doenca, conteudo, imagem, denuncias} = request.body;
+    async criar_Publicacao (request: Request, response:Response){
+        const {id_usuario, id_doenca, conteudo, imagem, denuncias} = request.body;
         const publicacaoService = new PublicacaoService();
 
         try{
-            const publicacao = await publicacaoService.criar_publicacao({
-                id_user,
+            const publicacao = await publicacaoService.criar_Publicacao({
+                id_usuario,
                 id_doenca,
                 conteudo,
                 imagem,
@@ -25,13 +24,33 @@ class PublicacaoController {
         }
     }
 
-    //Achar publicação por conteúdo
-    async achar_publi(request: Request, response: Response) {
-        const { conteudo } = request.params;
+    //Listar Publicações
+    async listar_Publicacao(request: Request, response: Response) {
+        const publicacaoService = new PublicacaoService();
+
+        const publicacao = await publicacaoService.listar_Publicacao();
+
+        return response.json(publicacao);
+    }
+
+    //Listar Publicações por Doença
+    async listarPorDoenca_Publicacao(request: Request, response: Response) {
+        const { id_doenca } = request.params;
 
         const publicacaoService = new PublicacaoService();
 
-        const publicacao = await publicacaoService.achar_publi(conteudo);
+        const publicacao = await publicacaoService.listarPorDoenca_Publicacao(id_doenca);
+
+        return response.json(publicacao);
+    }
+
+    //Listar Publicações por Usuário
+    async listarPorUsuario_Publicacao(request: Request, response: Response) {
+        const { id_usuario } = request.params;
+
+        const publicacaoService = new PublicacaoService();
+
+        const publicacao = await publicacaoService.listarPorUsuario_Publicacao(id_usuario);
 
         return response.json(publicacao);
     }

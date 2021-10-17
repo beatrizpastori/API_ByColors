@@ -13,7 +13,7 @@ export class CreatePublicacoes1632701916705 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: "id_user",
+                        name: "id_usuario",
                         type: "integer",
                     },
                     {
@@ -26,9 +26,9 @@ export class CreatePublicacoes1632701916705 implements MigrationInterface {
                         length: "200",
                     },
                     {
-                        name: "imagem", //perguntar para o Victor: usar BLOB ou não?
+                        name: "imagem",
                         type: "varchar",
-                        length: "100",
+                        length: "1000",
                     },
                     {
                         name: "data",
@@ -50,7 +50,7 @@ export class CreatePublicacoes1632701916705 implements MigrationInterface {
                         name: "FKUser",
                         referencedTableName: "usuarios",
                         referencedColumnNames: ["id_usuario"],
-                        columnNames: ["id_user"],
+                        columnNames: ["id_usuario"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
                     },

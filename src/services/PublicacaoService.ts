@@ -3,7 +3,7 @@ import { Publicacao } from "../entities/Publicacao"
 import { PublicacaoRepository } from "../repositories/PublicacaoRepository";
 
 interface IPublicacaoCreate{
-    id_user: number;
+    id_usuario: number;
     id_doenca: number;
     conteudo: string;
     imagem: string;
@@ -19,14 +19,15 @@ class PublicacaoService{
     }
 
     //Criar Publicação
-    async criar_publicacao ({id_user, id_doenca, conteudo, imagem, denuncias}: IPublicacaoCreate){
+    async criar_Publicacao ({id_usuario, id_doenca, conteudo, imagem, denuncias}: IPublicacaoCreate){
 
         const publicacao = this.publicacaoRepository.create({
-            id_user,
+            id_usuario,
             id_doenca,
             conteudo,
             imagem,
-            denuncias
+            denuncias,
+            excluido:false,
         });
 
         await this.publicacaoRepository.save(publicacao);
@@ -34,13 +35,36 @@ class PublicacaoService{
         return publicacao;
     }
 
-    //Achar publicação por conteúdo
-    async achar_publi(conteudo: string) {
-        const publicacao = await this.publicacaoRepository.findOne({
-            conteudo
-        });
-        
-        return publicacao;
+    //Listar Publicações
+    async listar_Publicacao (){
+        const query = this.publicacaoRepository.createQueryBuilder("publicacao");
+    
+        query.leftJoinAndSelect("publicacao.usuario","usuario");
+        query.orderBy("data", "DESC");
+    
+        return await query.getMany();
+    }
+
+    //Listar Publicações Por Doença
+    async listarPorDoenca_Publicacao ( id_doenca: string){
+        const query = this.publicacaoRepository.createQueryBuilder("publicacao");
+    
+        query.leftJoinAndSelect("publicacao.usuario","usuario");
+        query.where("id_doenca = :id_doenca", { id_doenca });
+        query.orderBy("data", "DESC");
+    
+        return await query.getMany();
+    }
+
+    //Listar Publicações Por Usuário
+    async listarPorUsuario_Publicacao ( id_usuario: string){
+        const query = this.publicacaoRepository.createQueryBuilder("publicacao");
+    
+        query.leftJoinAndSelect("publicacao.usuario","usuario");
+        query.where("publicacao.id_usuario = :id_usuario", { id_usuario });
+        query.orderBy("data", "DESC");
+    
+        return await query.getMany();
     }
 }
 

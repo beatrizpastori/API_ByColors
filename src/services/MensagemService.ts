@@ -18,7 +18,6 @@ class MensagemService{
 
     //Criar Mensagem
     async criar_Mensagem ({id_usuario, id_doenca, conteudo_msg}: IMensagemCreate){
-
         const mensagem = this.mensagemRepository.create({
             id_usuario,
             id_doenca,
@@ -33,12 +32,13 @@ class MensagemService{
 
     //Listar Mensagem Por Doença
     async listarPorDoenca_Mensagem ( id_doenca: string){
-
-        const mensagem = this.mensagemRepository.find({
-            where: { id_doenca }
-        });
-
-        return mensagem;
+        const query = this.mensagemRepository.createQueryBuilder("mensagem");
+    
+        query.leftJoinAndSelect("mensagem.usuario","usuario");
+        query.where("id_doenca = :id_doenca", { id_doenca });
+        query.orderBy("data", "ASC");
+    
+        return await query.getMany();
     }
 }
 

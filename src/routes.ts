@@ -21,13 +21,18 @@ routes.get("/usuarios", usuariosController.listar_Usuario); //Listar todos
 routes.get("/usuarios/?email=:email", usuariosController.acharPorEmail_Usuario); //Achar por email
 routes.get("/usuarios/?id_usuario=:id_usuario", usuariosController.acharPorId_Usuario); //Achar por id
 routes.put("/usuarios/:id_usuario", usuariosController.atualizar_Usuario); //Atualizar
-routes.put("/usuarios/excluir/:id_usuario", usuariosController.excluir_Usuario); //Atualizar
-//Excluir
+routes.put("/usuarios/excluir/:id_usuario", usuariosController.excluir_Usuario); //Excluir
 
 //Publicação
-routes.post("/publicacao", publicacaoController.criar_publicacao); //Criar
-routes.get("/usuarios/:conteudo", publicacaoController.achar_publi);
+routes.post("/publicacao", publicacaoController.criar_Publicacao); //Criar
+routes.get("/publicacao", publicacaoController.listar_Publicacao); //Listar todos
+routes.get("/publicacao/?id_doenca=:id_doenca", publicacaoController.listarPorDoenca_Publicacao); //Listar por doença
+routes.get("/publicacao/?id_usuario=:id_usuario", publicacaoController.listarPorUsuario_Publicacao); //Listar por usuário
 //Excluir
+
+//Mensagem
+routes.post("/mensagem", mensagemController.criar_Mensagem); //Cadastrar
+routes.get("/mensagem/?id_doenca=:id_doenca", mensagemController.listarPorDoenca_Mensagem); //Listar por doença
 
 //Doenças
 routes.post("/doencas", doencasController.cadastro_doenca); //Cadastrar
@@ -37,9 +42,5 @@ routes.post("/contatos", contatosController.cadastro_contato); //Cadastrar
 
 //Curtidas
 routes.post("/curtidas", curtidasController.curtir); //Cadastrar
-
-//Mensagem
-routes.post("/mensagem", mensagemController.criar_Mensagem); //Cadastrar
-routes.get("/mensagem/?id_doenca=:id_doenca", mensagemController.listarPorDoenca_Mensagem); //Achar por doença
 
 export { routes };

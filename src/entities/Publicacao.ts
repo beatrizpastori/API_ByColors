@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, JoinColumn } from 'typeorm';
-
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, JoinColumn, ManyToOne } from 'typeorm';
+import { Doenca } from './Doencas';
 import { Usuario } from "./Usuario";
 
 @Entity("publicacao")
@@ -8,11 +8,15 @@ class Publicacao {
     @PrimaryGeneratedColumn('increment')
     id_publicacao: number;
 
-    @JoinColumn({name: "id_usuario"})
-    @OneToOne(() => Usuario)
-    id_user: number;
-
     @Column()
+    id_usuario: number;
+
+    @JoinColumn({name: "id_usuario"})
+    @ManyToOne(() => Usuario)
+    usuario: Usuario;
+
+    @JoinColumn({name: "id_doenca"})
+    @ManyToOne(() => Doenca)
     id_doenca: number;
 
     @Column()
