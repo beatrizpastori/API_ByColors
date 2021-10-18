@@ -28,7 +28,7 @@ routes.post("/publicacao", publicacaoController.criar_Publicacao); //Criar
 routes.get("/publicacao", publicacaoController.listar_Publicacao); //Listar todos
 routes.get("/publicacao/?id_doenca=:id_doenca", publicacaoController.listarPorDoenca_Publicacao); //Listar por doença
 routes.get("/publicacao/?id_usuario=:id_usuario", publicacaoController.listarPorUsuario_Publicacao); //Listar por usuário
-//Excluir
+routes.put("/publicacao/excluir/:id_publicacao", publicacaoController.excluir_Publicacao); //Excluir
 
 //Mensagem
 routes.post("/mensagem", mensagemController.criar_Mensagem); //Cadastrar

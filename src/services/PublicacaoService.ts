@@ -66,6 +66,17 @@ class PublicacaoService{
     
         return await query.getMany();
     }
+
+    //Excluir Publicacao
+    async excluir_Publicacao(id_publicacao:string, excluido:boolean) {
+        const usuarios = await this.publicacaoRepository.createQueryBuilder().
+        update(Publicacao)
+        .set({ excluido })
+        .where("id_publicacao = :id_publicacao", {
+            id_publicacao
+        })
+        .execute();
+    }
 }
 
 export {PublicacaoService};

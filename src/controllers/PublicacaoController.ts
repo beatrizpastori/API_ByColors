@@ -54,6 +54,18 @@ class PublicacaoController {
 
         return response.json(publicacao);
     }
+
+    //Publicação Usuário
+    async excluir_Publicacao(request: Request, response: Response) {
+        const { id_publicacao } = request.params;
+        const { excluido } = request.body;
+
+        const usuariosService = new PublicacaoService();
+
+        const usuarios = await usuariosService.excluir_Publicacao(id_publicacao, excluido);
+
+        return response.json(usuarios);
+    }
 }
 
 export {PublicacaoController};
