@@ -3,13 +3,14 @@ import { PublicacaoService } from "../services/PublicacaoService";
 
 class PublicacaoController {
     async criar_Publicacao (request: Request, response:Response){
-        const {id_usuario, id_doenca, conteudo, imagem, denuncias} = request.body;
+        const {id_usuario, id_doenca, doenca_id, conteudo, imagem, denuncias} = request.body;
         const publicacaoService = new PublicacaoService();
 
         try{
             const publicacao = await publicacaoService.criar_Publicacao({
                 id_usuario,
                 id_doenca,
+                doenca_id,
                 conteudo,
                 imagem,
                 denuncias

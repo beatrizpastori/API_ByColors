@@ -5,6 +5,7 @@ import { PublicacaoRepository } from "../repositories/PublicacaoRepository";
 interface IPublicacaoCreate{
     id_usuario: number;
     id_doenca: number;
+    doenca_id: number;
     conteudo: string;
     imagem: string;
     denuncias: number;
@@ -24,6 +25,7 @@ class PublicacaoService{
         const publicacao = this.publicacaoRepository.create({
             id_usuario,
             id_doenca,
+            doenca_id: id_doenca,
             conteudo,
             imagem,
             denuncias,

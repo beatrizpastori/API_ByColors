@@ -15,12 +15,12 @@ class Publicacao {
     @ManyToOne(() => Usuario)
     usuario: Usuario;
 
-    @Column({ name: "id_doenca" })
-    doenca_id: number;
-
     @JoinColumn({name: "id_doenca"})
     @ManyToOne(() => Doenca)
     id_doenca: number;
+
+    @Column({ name: "id_doenca" })
+    doenca_id: number;
 
     @Column()
     conteudo: string;
