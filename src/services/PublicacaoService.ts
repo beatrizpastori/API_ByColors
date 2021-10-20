@@ -42,6 +42,7 @@ class PublicacaoService{
         const query = this.publicacaoRepository.createQueryBuilder("publicacao");
     
         query.leftJoinAndSelect("publicacao.usuario","usuario");
+        query.where("publicacao.excluido = false");
         query.orderBy("data", "DESC");
     
         return await query.getMany();
@@ -53,6 +54,7 @@ class PublicacaoService{
     
         query.leftJoinAndSelect("publicacao.usuario","usuario");
         query.where("id_doenca = :id_doenca", { id_doenca });
+        query.andWhere("publicacao.excluido = false");
         query.orderBy("data", "DESC");
     
         return await query.getMany();
@@ -64,6 +66,7 @@ class PublicacaoService{
     
         query.leftJoinAndSelect("publicacao.usuario","usuario");
         query.where("publicacao.id_usuario = :id_usuario", { id_usuario });
+        query.andWhere("publicacao.excluido = false");
         query.orderBy("data", "DESC");
     
         return await query.getMany();
