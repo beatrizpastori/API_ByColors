@@ -1,7 +1,6 @@
 import {Request, Response} from "express";
 import { CurtidaService } from "../services/CurtidasService";
 
-
 class CurtidasController {
     async curtir (request: Request, response:Response){
         const {id_user, id_post} = request.body;

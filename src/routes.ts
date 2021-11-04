@@ -5,6 +5,7 @@ import { DoencasController } from "./controllers/DoencaController";
 import { ContatosController } from "./controllers/ContatosController";
 import { CurtidasController } from "./controllers/CurtidasController";
 import { MensagemController } from "./controllers/MensagemController";
+import { DenunciasController } from "./controllers/DenunciasController";
 
 const routes = Router();
 
@@ -14,6 +15,7 @@ const doencasController = new DoencasController();
 const contatosController = new ContatosController();
 const curtidasController = new CurtidasController();
 const mensagemController = new MensagemController();
+const denunciasController = new DenunciasController();
 
 //Usuários
 routes.post("/usuarios", usuariosController.cadastrar_Usuario); //Cadastrar
@@ -41,6 +43,9 @@ routes.post("/doencas", doencasController.cadastro_doenca); //Cadastrar
 routes.post("/contatos", contatosController.cadastro_contato); //Cadastrar
 
 //Curtidas
-routes.post("/curtidas", curtidasController.curtir); //Cadastrar
+routes.post("/curtidas", curtidasController.curtir); //Curtir
+
+//Denuncias
+routes.post("/denuncias", denunciasController.denunciar); //Denunciar
 
 export { routes };
