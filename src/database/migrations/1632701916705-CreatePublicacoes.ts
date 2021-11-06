@@ -36,10 +36,6 @@ export class CreatePublicacoes1632701916705 implements MigrationInterface {
                         default: "now()",
                     },
                     {
-                        name: "denuncias",
-                        type: "integer",
-                    },
-                    {
                         name: "excluido",
                         type: "boolean",
                         default: false,

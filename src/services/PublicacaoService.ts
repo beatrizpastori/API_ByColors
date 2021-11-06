@@ -8,7 +8,6 @@ interface IPublicacaoCreate{
     doenca_id: number;
     conteudo: string;
     imagem: string;
-    denuncias: number;
     excluido?: boolean;
 }
 
@@ -20,7 +19,7 @@ class PublicacaoService{
     }
 
     //Criar Publicação
-    async criar_Publicacao ({id_usuario, id_doenca, conteudo, imagem, denuncias}: IPublicacaoCreate){
+    async criar_Publicacao ({id_usuario, id_doenca, conteudo, imagem}: IPublicacaoCreate){
 
         const publicacao = this.publicacaoRepository.create({
             id_usuario,
@@ -28,7 +27,6 @@ class PublicacaoService{
             doenca_id: id_doenca,
             conteudo,
             imagem,
-            denuncias,
             excluido:false,
         });
 
@@ -49,7 +47,7 @@ class PublicacaoService{
     }
 
     //Listar Publicações Por Doença
-    async listarPorDoenca_Publicacao ( id_doenca: string){
+    async listarPorDoenca_Publicacao(id_doenca: string){
         const query = this.publicacaoRepository.createQueryBuilder("publicacao");
     
         query.leftJoinAndSelect("publicacao.usuario","usuario");
@@ -61,7 +59,7 @@ class PublicacaoService{
     }
 
     //Listar Publicações Por Usuário
-    async listarPorUsuario_Publicacao ( id_usuario: string){
+    async listarPorUsuario_Publicacao(id_usuario: string){
         const query = this.publicacaoRepository.createQueryBuilder("publicacao");
     
         query.leftJoinAndSelect("publicacao.usuario","usuario");
@@ -72,9 +70,29 @@ class PublicacaoService{
         return await query.getMany();
     }
 
+    //Listar Publicações Por Id
+    async listarPorId_Publicacao(id_publicacao: string){
+        const list = await this.publicacaoRepository.find({
+            where: { id_publicacao }
+        });
+
+        return list;
+    }
+
+    //Atualizar Publicação
+    async atualizar_Pulicacao(id_publicacao:string, doenca_id: number, conteudo: string, imagem: string) {
+        const publicacao = await this.publicacaoRepository.createQueryBuilder().
+        update(Publicacao)
+        .set({ doenca_id, conteudo, imagem})
+        .where("id_publicacao = :id_publicacao", {
+            id_publicacao
+        })
+        .execute();
+    }
+
     //Excluir Publicacao
     async excluir_Publicacao(id_publicacao:string, excluido:boolean) {
-        const usuarios = await this.publicacaoRepository.createQueryBuilder().
+        const publicacao = await this.publicacaoRepository.createQueryBuilder().
         update(Publicacao)
         .set({ excluido })
         .where("id_publicacao = :id_publicacao", {

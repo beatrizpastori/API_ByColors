@@ -13,11 +13,11 @@ export class CreateDenuncias1636028963657 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: "id_post",
+                        name: "id_publicacao",
                         type: "integer",
                     },
                     {
-                        name: "id_user",
+                        name: "id_usuario",
                         type: "integer",
                     }
                 ],     
@@ -26,7 +26,7 @@ export class CreateDenuncias1636028963657 implements MigrationInterface {
                         name: "FKUser",
                         referencedTableName: "usuarios",
                         referencedColumnNames: ["id_usuario"],
-                        columnNames: ["id_user"],
+                        columnNames: ["id_usuario"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
                     },
@@ -34,7 +34,7 @@ export class CreateDenuncias1636028963657 implements MigrationInterface {
                         name: "FKPost",
                         referencedTableName: "publicacao",
                         referencedColumnNames: ["id_publicacao"],
-                        columnNames: ["id_post"],
+                        columnNames: ["id_publicacao"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
                     },

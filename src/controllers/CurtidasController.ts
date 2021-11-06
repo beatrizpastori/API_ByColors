@@ -3,13 +3,13 @@ import { CurtidaService } from "../services/CurtidasService";
 
 class CurtidasController {
     async curtir (request: Request, response:Response){
-        const {id_user, id_post} = request.body;
+        const {id_usuario, id_publicacao} = request.body;
         const curtidaService = new CurtidaService();
 
         try{
             const curtidas = await curtidaService.curtir({
-                id_user, 
-                id_post
+                id_usuario, 
+                id_publicacao
             });
 
             return response.json(curtidas);
@@ -19,6 +19,28 @@ class CurtidasController {
                 message: e.message,
             });
         }
+    }
+
+    //Contar Curtidas por Publicação
+    async ContarPorPubli_Curtidas(request: Request, response: Response) {
+        const { id_publicacao } = request.params;
+
+        const curtidasService = new CurtidaService();
+
+        const list = await curtidasService.ContarPorPubli_Curtidas(id_publicacao);
+
+        return response.json(list);
+    }
+
+    //Descurtir
+    async descurtir(request: Request, response: Response) {
+        const { id_usuario, id_publicacao } = request.params;
+
+        const curtidasService = new CurtidaService();
+
+        const curtidas = await curtidasService.descurtir(id_usuario, id_publicacao);
+
+        return response.json(curtidas);
     }
 }
 

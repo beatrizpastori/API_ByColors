@@ -3,8 +3,8 @@ import { Curtida } from "../entities/Curtidas"
 import { CurtidasRepository } from "../repositories/CurtidasRepository";
 
 interface ICurtidaCreate{
-    id_user: number;
-    id_post: number;
+    id_usuario: number;
+    id_publicacao: number;
 }
 
 class CurtidaService{
@@ -15,16 +15,48 @@ class CurtidaService{
     }
 
     //Curtir
-    async curtir ({id_user, id_post}: ICurtidaCreate){
+    async curtir ({id_usuario, id_publicacao}: ICurtidaCreate){
 
         const curtida = this.curtidaRepository.create({
-            id_user,
-            id_post
+            id_usuario,
+            id_publicacao
         });
 
         await this.curtidaRepository.save(curtida);
 
         return curtida;
+    }
+
+    //Contar Curtidas por Publicação
+    async ContarPorPubli_Curtidas (id_publicacao:string){
+
+        const count = this.curtidaRepository.count({
+            where: { id_publicacao },
+        });
+
+        return count;
+    }
+
+    //Descurtir
+    async descurtir (id_publicacao:string, id_usuario:string){
+        const curtida = await this.curtidaRepository.createQueryBuilder()
+        .delete()
+        .from(Curtida)
+        .where("id_publicacao = :id_publicacao", {
+            id_publicacao
+        })
+        .andWhere("id_usuario = :id_usuario", {
+            id_usuario
+        })
+        .execute();
+
+        // const query = this.curtidaRepository.createQueryBuilder("curtida");
+    
+        // query.delete();
+        // query.where("id_publicacao = :id_publicacao", { id_publicacao });
+        // query.andWhere("id_usuario = :id_usuario", { id_usuario });
+    
+        // return await query.delete();
     }
 }
 

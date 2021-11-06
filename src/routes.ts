@@ -30,6 +30,8 @@ routes.post("/publicacao", publicacaoController.criar_Publicacao); //Criar
 routes.get("/publicacao", publicacaoController.listar_Publicacao); //Listar todos
 routes.get("/publicacao/?id_doenca=:id_doenca", publicacaoController.listarPorDoenca_Publicacao); //Listar por doença
 routes.get("/publicacao/?id_usuario=:id_usuario", publicacaoController.listarPorUsuario_Publicacao); //Listar por usuário
+routes.get("/publicacao/?id_publicacao=:id_publicacao", publicacaoController.listarPorId_Publicacao); //Listar por id
+routes.put("/publicacao/:id_publicacao", publicacaoController.atualizar_Publicacao); //Atualizar
 routes.put("/publicacao/excluir/:id_publicacao", publicacaoController.excluir_Publicacao); //Excluir
 
 //Mensagem
@@ -44,8 +46,11 @@ routes.post("/contatos", contatosController.cadastro_contato); //Cadastrar
 
 //Curtidas
 routes.post("/curtidas", curtidasController.curtir); //Curtir
+routes.get("/curtidas/?id_publicacao=:id_publicacao", curtidasController.ContarPorPubli_Curtidas); //Contar Curtidas por Publicação
+routes.delete("/curtidas", curtidasController.descurtir); //Descurtir
 
 //Denuncias
 routes.post("/denuncias", denunciasController.denunciar); //Denunciar
+routes.get("/denuncias/?id_publicacao=:id_publicacao", denunciasController.ContarPorPubli_Denuncias); //Contar Denúncias por Publicação
 
 export { routes };

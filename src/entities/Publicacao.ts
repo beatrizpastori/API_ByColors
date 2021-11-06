@@ -30,9 +30,6 @@ class Publicacao {
 
     @CreateDateColumn()
     data: Date;
-
-    @Column()
-    denuncias: number;
     
     @Column()
     excluido: boolean;

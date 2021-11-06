@@ -3,7 +3,7 @@ import { PublicacaoService } from "../services/PublicacaoService";
 
 class PublicacaoController {
     async criar_Publicacao (request: Request, response:Response){
-        const {id_usuario, id_doenca, doenca_id, conteudo, imagem, denuncias} = request.body;
+        const {id_usuario, id_doenca, doenca_id, conteudo, imagem} = request.body;
         const publicacaoService = new PublicacaoService();
 
         try{
@@ -12,8 +12,7 @@ class PublicacaoController {
                 id_doenca,
                 doenca_id,
                 conteudo,
-                imagem,
-                denuncias
+                imagem
             });
 
             return response.json(publicacao);
@@ -56,16 +55,39 @@ class PublicacaoController {
         return response.json(publicacao);
     }
 
-    //Publicação Usuário
+    //Listar Publicação Por Id
+    async listarPorId_Publicacao(request: Request, response: Response) {
+        const { id_publicacao } = request.params;
+
+        const publicacaoService = new PublicacaoService();
+
+        const list = await publicacaoService.listarPorId_Publicacao(id_publicacao);
+
+        return response.json(list);
+    }
+
+    //Atualizar Publicação
+    async atualizar_Publicacao(request: Request, response: Response) {
+        const { id_publicacao } = request.params;
+        const { doenca_id, conteudo, imagem } = request.body;
+
+        const publicacaoService = new PublicacaoService();
+
+        const publicacao = await publicacaoService.atualizar_Pulicacao(id_publicacao, doenca_id, conteudo, imagem);
+
+        return response.json(publicacao);
+    }
+
+    //Excluir Publicação
     async excluir_Publicacao(request: Request, response: Response) {
         const { id_publicacao } = request.params;
         const { excluido } = request.body;
 
-        const usuariosService = new PublicacaoService();
+        const publicacaoService = new PublicacaoService();
 
-        const usuarios = await usuariosService.excluir_Publicacao(id_publicacao, excluido);
+        const publicacao = await publicacaoService.excluir_Publicacao(id_publicacao, excluido);
 
-        return response.json(usuarios);
+        return response.json(publicacao);
     }
 }
 
