@@ -47,6 +47,7 @@ routes.post("/contatos", contatosController.cadastro_contato); //Cadastrar
 //Curtidas
 routes.post("/curtidas", curtidasController.curtir); //Curtir
 routes.get("/curtidas/?id_publicacao=:id_publicacao", curtidasController.ContarPorPubli_Curtidas); //Contar Curtidas por Publicação
+routes.get("/curtidas/?id_publicacao=:id_publicacao/?id_usuario=:id_usuario", curtidasController.AcharPorNomeEPost_Curtidas); //Contar Curtidas por Publicação
 routes.delete("/curtidas", curtidasController.descurtir); //Descurtir
 
 //Denuncias

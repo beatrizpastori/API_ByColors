@@ -32,13 +32,24 @@ class CurtidasController {
         return response.json(list);
     }
 
-    //Descurtir
-    async descurtir(request: Request, response: Response) {
-        const { id_usuario, id_publicacao } = request.params;
+    //Achar Curtida por Nome e Post
+    async AcharPorNomeEPost_Curtidas(request: Request, response: Response) {
+        const { id_publicacao, id_usuario } = request.params;
 
         const curtidasService = new CurtidaService();
 
-        const curtidas = await curtidasService.descurtir(id_usuario, id_publicacao);
+        const list = await curtidasService.AcharPorNomeEPost_Curtidas(id_publicacao, id_usuario);
+
+        return response.json(list);
+    }
+
+    //Descurtir
+    async descurtir(request: Request, response: Response) {
+        const { id_publicacao, id_usuario } = request.body;
+
+        const curtidasService = new CurtidaService();
+
+        const curtidas = await curtidasService.descurtir(id_publicacao, id_usuario);
 
         return response.json(curtidas);
     }

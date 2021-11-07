@@ -37,26 +37,29 @@ class CurtidaService{
         return count;
     }
 
-    //Descurtir
-    async descurtir (id_publicacao:string, id_usuario:string){
-        const curtida = await this.curtidaRepository.createQueryBuilder()
-        .delete()
-        .from(Curtida)
-        .where("id_publicacao = :id_publicacao", {
-            id_publicacao
-        })
-        .andWhere("id_usuario = :id_usuario", {
-            id_usuario
-        })
-        .execute();
+    //Achar Curtida por Nome e Post
+    async AcharPorNomeEPost_Curtidas (id_publicacao:string, id_usuario:string) {
 
-        // const query = this.curtidaRepository.createQueryBuilder("curtida");
-    
-        // query.delete();
-        // query.where("id_publicacao = :id_publicacao", { id_publicacao });
-        // query.andWhere("id_usuario = :id_usuario", { id_usuario });
-    
-        // return await query.delete();
+        const find = this.curtidaRepository.find({
+            where: { id_publicacao, id_usuario },
+        });
+
+        return find;
+    }
+
+    //Descurtir
+    async descurtir (id_publicacao:any, id_usuario:any){
+        try {
+            return await this.curtidaRepository.createQueryBuilder()
+            .delete()
+            .from(Curtida)
+            .where("curtidas.id_publicacao = :id_publicacao", { id_publicacao })
+            .andWhere("curtidas.id_usuario = :id_usuario", { id_usuario })
+            .execute();
+        }
+        catch(err) {
+            
+        }
     }
 }
 
