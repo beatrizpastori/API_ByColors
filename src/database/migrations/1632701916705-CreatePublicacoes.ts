@@ -28,7 +28,7 @@ export class CreatePublicacoes1632701916705 implements MigrationInterface {
                     {
                         name: "imagem",
                         type: "varchar",
-                        length: "1000",
+                        length: "100000",
                     },
                     {
                         name: "data",
