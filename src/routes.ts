@@ -6,6 +6,7 @@ import { ContatosController } from "./controllers/ContatosController";
 import { CurtidasController } from "./controllers/CurtidasController";
 import { MensagemController } from "./controllers/MensagemController";
 import { DenunciasController } from "./controllers/DenunciasController";
+import { MailsController } from "./controllers/MailsController";
 
 const routes = Router();
 
@@ -16,6 +17,7 @@ const contatosController = new ContatosController();
 const curtidasController = new CurtidasController();
 const mensagemController = new MensagemController();
 const denunciasController = new DenunciasController();
+const mailsController = new MailsController();
 
 //Usuários
 routes.post("/usuarios", usuariosController.cadastrar_Usuario); //Cadastrar
@@ -53,5 +55,7 @@ routes.delete("/curtidas", curtidasController.descurtir); //Descurtir
 //Denuncias
 routes.post("/denuncias", denunciasController.denunciar); //Denunciar
 routes.get("/denuncias/?id_publicacao=:id_publicacao", denunciasController.ContarPorPubli_Denuncias); //Contar Denúncias por Publicação
+
+routes.post("/mail/password", mailsController.sendForgotEmail); //Mandar Email Senha
 
 export { routes };
